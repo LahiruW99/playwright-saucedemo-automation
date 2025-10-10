@@ -7,7 +7,16 @@ test.describe("Login Functionality", ()=>{
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
-        await loginpage.validLogin("standard_user", "secret_sauce")
+        await loginpage.login("standard_user", "secret_sauce")
         await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html")
+    });
+
+    test("Login with Invalid Password", async({page})=>{
+        const loginpage = new LoginPage(page);
+
+        await loginpage.navigateToLoginPage();
+        await expect(page).toHaveTitle("Swag Labs");
+        await loginpage.login("standard_user", "sauce")
+        await expect(page.getByText("Epic sadface: Username and password do not match any user in this service")).toBeVisible();  
     });
 });
