@@ -11,6 +11,5 @@ test.describe("Add Products to cart", ()=>{
 
         const productPage = new ProductPage(page);
         await productPage.addBackpackToCart();
-        await page.pause();
     });
 });
