@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { POManager } from '../pages/POManager';
 
 test.describe("Login Functionality", ()=>{
     test("Login with valid credentials", async ({page})=>{
-        const loginpage = new LoginPage(page);
+        const poManager = new POManager(page);
+        const loginpage = poManager.getLoginPage();
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
@@ -12,7 +13,8 @@ test.describe("Login Functionality", ()=>{
     });
 
     test("Login with Invalid Password", async({page})=>{
-        const loginpage = new LoginPage(page);
+        const poManager = new POManager(page);
+        const loginpage = poManager.getLoginPage();
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
@@ -21,7 +23,8 @@ test.describe("Login Functionality", ()=>{
     });
 
     test("Login with Invalid Username", async({page})=>{
-        const loginpage = new LoginPage(page);
+        const poManager = new POManager(page);
+        const loginpage = poManager.getLoginPage();
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
@@ -30,7 +33,8 @@ test.describe("Login Functionality", ()=>{
     });
 
     test("Click Login without username and password", async({page})=>{
-        const loginpage = new LoginPage(page);
+        const poManager = new POManager(page);
+        const loginpage = poManager.getLoginPage();
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
