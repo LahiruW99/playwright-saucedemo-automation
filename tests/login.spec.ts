@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { POManager } from '../pages/POManager';
+import testData from "../utils/loginTestData.json";
 
 test.describe("Login Functionality", ()=>{
     test("Login with valid credentials", async ({page})=>{
@@ -8,7 +9,7 @@ test.describe("Login Functionality", ()=>{
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
-        await loginpage.login("standard_user", "secret_sauce")
+        await loginpage.login(testData.login.validUser.username, testData.login.validUser.password)
         await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html")
     });
 
@@ -18,7 +19,7 @@ test.describe("Login Functionality", ()=>{
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
-        await loginpage.login("standard_user", "sauce")
+        await loginpage.login(testData.login.invalidPassword.username, testData.login.invalidPassword.password)
         await expect(page.getByText("Epic sadface: Username and password do not match any user in this service")).toBeVisible();  
     });
 
@@ -28,7 +29,7 @@ test.describe("Login Functionality", ()=>{
 
         await loginpage.navigateToLoginPage();
         await expect(page).toHaveTitle("Swag Labs");
-        await loginpage.login("standard", "secret_sauce")
+        await loginpage.login(testData.login.invalidUserName.username, testData.login.invalidUserName.password)
         await expect(page.getByText("Epic sadface: Username and password do not match any user in this service")).toBeVisible();  
     });
 
